@@ -51,7 +51,7 @@ public class BuilderFactoryTest {
         Person2 person1 = new Person2(FIRST_NAME, LAST_NAME, AGE, Arrays.asList(LOVED_THINGS));
 
         //when
-        Person1 person2 = Person1.builder()
+        Person2 person2 = Person2.builder()
                 .withFirstName(FIRST_NAME)
                 .withLastName(LAST_NAME)
                 .withLovedThings(LOVED_THINGS)
