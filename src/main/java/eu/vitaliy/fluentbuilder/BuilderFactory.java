@@ -2,6 +2,7 @@ package eu.vitaliy.fluentbuilder;
 
 import java.beans.Expression;
 import java.beans.Statement;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -35,24 +36,30 @@ public class BuilderFactory {
             }
             String propertyName = method.getName().substring("with".length());
 
-            if(method.getParameterTypes()[0].isArray()) {
-                handleArrayArgument(args[0], propertyName);
-            } else {
-                String setter = "set" + propertyName;
-                Statement stmt = new Statement(this.obj, setter, args);
+            String setter = "set" + propertyName;
+            Statement stmt = new Statement(this.obj, setter, args);
+            try{
                 stmt.execute();
+            }catch(NoSuchMethodException ex){
+                try{
+                    handleAnnotation(args[0], propertyName);
+                }catch(NoSuchFieldException exx){
+                    exx.printStackTrace();
+                }
             }
             return proxy;
         }
 
-        private void handleArrayArgument(Object arg, String propertyName) throws Exception {
-            String listGetterName = "get" + propertyName;
-            Expression listGetterMethod = new Expression(this.obj, listGetterName, null);
-            listGetterMethod.execute();
-            List list = (List) listGetterMethod.getValue();
-            list.clear();
-            list.addAll(Arrays.asList((Object[]) arg));
+        private void handleAnnotation(Object arg, String propertyName) throws NoSuchFieldException, IllegalAccessException {
+            String fieldName = Character.toLowerCase(propertyName.charAt(0)) + propertyName.substring(1);
+            Field field = obj.getClass().getDeclaredField(fieldName);
+            if(field.isAnnotationPresent(FluentSetter.class))
+            {
+                field.setAccessible(true);
+                field.set(obj, arg);
+            }
         }
+
     }
 
     public static <T,V extends Builder<T>> V createBuilder(T object, Class<V> builderInterface) 

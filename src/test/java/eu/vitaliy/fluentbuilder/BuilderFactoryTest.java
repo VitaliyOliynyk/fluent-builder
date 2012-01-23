@@ -15,29 +15,22 @@ import static org.fest.assertions.Assertions.*;
  */
 public class BuilderFactoryTest {
 
-    public static final String FIRST_NAME = "John";
-    public static final String LAST_NAME = "Smith";
-    public static final String[] LOVED_THINGS = $("pizza", "soccer", "jogging");
-    public static final int AGE = 30;
+
 
     @Test
     public void createBuilderTest(){
         //given
-        Person1 person1 = new Person1();
+        Person person1 = new Person();
 
-        person1.setFirstName(FIRST_NAME);
-        person1.setLastName(LAST_NAME);
-        person1.getLovedThings().add(LOVED_THINGS[0]);
-        person1.getLovedThings().add(LOVED_THINGS[1]);
-        person1.getLovedThings().add(LOVED_THINGS[2]);
-        person1.setAge(AGE);
+        person1.setFirstName(Data.FIRST_NAME);
+        person1.setLastName(Data.LAST_NAME);
+        person1.setAge(Data.AGE);
 
         //when
-        Person1 person2 = Person1.builder()
-                .withFirstName(FIRST_NAME)
-                .withLastName(LAST_NAME)
-                .withLovedThings(LOVED_THINGS)
-                .withAge(AGE)
+        Person person2 = Person.builder()
+                .withFirstName(Data.FIRST_NAME)
+                .withLastName(Data.LAST_NAME)
+                .withAge(Data.AGE)
                 .build();
 
         //then
@@ -48,14 +41,13 @@ public class BuilderFactoryTest {
     @Test
     public void createBuilderWithAnnotationTest(){
 //given
-        Person2 person1 = new Person2(FIRST_NAME, LAST_NAME, AGE, Arrays.asList(LOVED_THINGS));
+        PersonAnnotated person1 = new PersonAnnotated(Data.FIRST_NAME, Data.LAST_NAME, Data.AGE, Arrays.asList(Data.LOVED_THINGS_ARRAY));
 
         //when
-        Person2 person2 = Person2.builder()
-                .withFirstName(FIRST_NAME)
-                .withLastName(LAST_NAME)
-                .withLovedThings(LOVED_THINGS)
-                .withAge(AGE)
+        PersonAnnotated person2 = PersonAnnotated.builder()
+                .withFirstName(Data.FIRST_NAME)
+                .withLastName(Data.LAST_NAME)
+                .withAge(Data.AGE)
                 .build();
 
         //then
@@ -64,7 +56,5 @@ public class BuilderFactoryTest {
     }
 
 
-    private static <T> T[] $(T... obj){
-        return obj;
-    }
+
 }
