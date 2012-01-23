@@ -32,7 +32,7 @@ public class BuilderFactory {
 
         private Object handleWithPrefixMethod(Object proxy, Method method, Object[] args) throws Exception {
             if(method.getParameterTypes().length !=1) {
-                throw new UnsupportedOperationException();
+                throw new TooManyArgumentsException(args);
             }
             String propertyName = method.getName().substring("with".length());
 
@@ -41,11 +41,7 @@ public class BuilderFactory {
             try{
                 stmt.execute();
             }catch(NoSuchMethodException ex){
-                try{
-                    handleAnnotation(args[0], propertyName);
-                }catch(NoSuchFieldException exx){
-                    exx.printStackTrace();
-                }
+                handleAnnotation(args[0], propertyName);
             }
             return proxy;
         }
@@ -57,6 +53,8 @@ public class BuilderFactory {
             {
                 field.setAccessible(true);
                 field.set(obj, arg);
+            }else{
+                throw new NoSuchAnnotatedFieldException(field);
             }
         }
 
