@@ -7,19 +7,19 @@ package eu.vitaliy.fluentbuilder;
  * Time: 15:28
  * To change this template use File | Settings | File Templates.
  */
-public class WithNotAnnotatedField {
+public class WithTooManyParameters {
 
     private String firstName;
 
-    public WithNotAnnotatedField() {
+    public WithTooManyParameters() {
     }
 
-    public interface Builder extends eu.vitaliy.fluentbuilder.Builder<WithNotAnnotatedField> {
-        public Builder withFirstName(String firstName);
+    public interface Builder extends eu.vitaliy.fluentbuilder.Builder<WithTooManyParameters> {
+        public Builder withFirstName(String arg1, String arg2);
     }
 
      public static Builder builder() {
-        return BuilderFactory.createBuilder(new WithNotAnnotatedField(), Builder.class);
+        return BuilderFactory.createBuilder(new WithTooManyParameters(), Builder.class);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class WithNotAnnotatedField {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        WithNotAnnotatedField that = (WithNotAnnotatedField) o;
+        WithTooManyParameters that = (WithTooManyParameters) o;
 
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
 
