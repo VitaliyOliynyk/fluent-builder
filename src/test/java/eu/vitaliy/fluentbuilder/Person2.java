@@ -3,13 +3,29 @@ package eu.vitaliy.fluentbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person2 {
+
+    @FluentSetter
     private int age;
+
+    @FluentSetter
     private List<String> lovedThings = new ArrayList<String>();
+
+    @FluentSetter
     private String firstName;
-    private String lastName;    
-    
-    public Person() {
+
+    @FluentSetter
+    private String lastName;
+
+    public Person2() {
+    }
+
+
+    public Person2(String firstName, String lastName, int age, List<String> lovedThings) {
+        this.age = age;
+        this.lovedThings = lovedThings;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public int getAge() {
@@ -28,37 +44,22 @@ public class Person {
         return lastName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
 
-    public void setLovedThings(List<String> newbars) {
-        this.lovedThings = newbars;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    
-    public interface Builder extends eu.vitaliy.fluentbuilder.Builder<Person> {
+    public interface Builder extends eu.vitaliy.fluentbuilder.Builder<Person2> {
         public Builder withFirstName(String firstName);   
         public Builder withLastName(String lastName);
         public Builder withLovedThings(String... bars);
         public Builder withAge(int age);
-        public Person build();
+        public Person2 build();
     }
 
     public static Builder builder() {
-        return BuilderFactory.createBuilder(new Person(), Builder.class);
+        return BuilderFactory.createBuilder(new Person2(), Builder.class);
     }
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "Person2{" +
                 "age=" + age +
                 ", lovedThings=" + lovedThings +
                 ", firstName='" + firstName + '\'' +
@@ -71,12 +72,12 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Person person = (Person) o;
+        Person2 person2 = (Person2) o;
 
-        if (age != person.age) return false;
-        if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) return false;
-        if (lovedThings != null ? !lovedThings.equals(person.lovedThings) : person.lovedThings != null) return false;
+        if (age != person2.age) return false;
+        if (firstName != null ? !firstName.equals(person2.firstName) : person2.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(person2.lastName) : person2.lastName != null) return false;
+        if (lovedThings != null ? !lovedThings.equals(person2.lovedThings) : person2.lovedThings != null) return false;
 
         return true;
     }

@@ -23,28 +23,35 @@ public class BuilderFactory {
             if ("build".equals(method.getName())) {
                 return obj;
             } else if (method.getName().startsWith("with")) {
-                if(method.getParameterTypes().length !=1) {
-                    throw new UnsupportedOperationException();
-                }
-                String propertyName = method.getName().substring("with".length());
-
-                if(method.getParameterTypes()[0].isArray()) {
-                    String listGetterName = "get" + propertyName;
-                    Expression listGetterMethod = new Expression(this.obj, listGetterName, null);
-                    listGetterMethod.execute();
-                    List list = (List) listGetterMethod.getValue();
-                    list.clear();
-                    list.addAll(Arrays.asList((Object[]) args[0]));
-                    return proxy;                    
-                } else {
-                    String setter = "set" + propertyName;
-                    Statement stmt = new Statement(this.obj, setter, args);
-                    stmt.execute();
-                    return proxy;      
-                }
+                return handleWithPrefixMethod(proxy, method, args);
             } else {
                 throw new UnsupportedOperationException(method.toString());
             }
+        }
+
+        private Object handleWithPrefixMethod(Object proxy, Method method, Object[] args) throws Exception {
+            if(method.getParameterTypes().length !=1) {
+                throw new UnsupportedOperationException();
+            }
+            String propertyName = method.getName().substring("with".length());
+
+            if(method.getParameterTypes()[0].isArray()) {
+                handleArrayArgument(args[0], propertyName);
+            } else {
+                String setter = "set" + propertyName;
+                Statement stmt = new Statement(this.obj, setter, args);
+                stmt.execute();
+            }
+            return proxy;
+        }
+
+        private void handleArrayArgument(Object arg, String propertyName) throws Exception {
+            String listGetterName = "get" + propertyName;
+            Expression listGetterMethod = new Expression(this.obj, listGetterName, null);
+            listGetterMethod.execute();
+            List list = (List) listGetterMethod.getValue();
+            list.clear();
+            list.addAll(Arrays.asList((Object[]) arg));
         }
     }
 
