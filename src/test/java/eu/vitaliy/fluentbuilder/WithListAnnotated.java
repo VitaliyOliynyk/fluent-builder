@@ -23,7 +23,6 @@ public class WithListAnnotated {
 
     public interface Builder extends eu.vitaliy.fluentbuilder.Builder<WithListAnnotated> {
         public Builder withList(List<String> list);
-        public Builder withList(String... firstName);
     }
 
      public static Builder builder() {

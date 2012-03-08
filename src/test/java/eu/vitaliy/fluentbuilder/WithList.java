@@ -24,7 +24,6 @@ public class WithList {
 
     public interface Builder extends eu.vitaliy.fluentbuilder.Builder<WithList> {
         public Builder withList(List<String> list);
-        public Builder withList(String ... firstName);
     }
 
      public static Builder builder() {

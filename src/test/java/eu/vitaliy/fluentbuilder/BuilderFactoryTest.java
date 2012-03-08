@@ -34,7 +34,7 @@ public class BuilderFactoryTest {
                 .build();
 
         //then
-        assertThat(person1.equals(person2)).isTrue();
+        assertThat(person1).isEqualTo(person2);
 
     }
 
@@ -51,7 +51,7 @@ public class BuilderFactoryTest {
                 .build();
 
         //then
-        assertThat(person1.equals(person2)).isTrue();
+        assertThat(person1).isEqualTo(person2);
 
     }
 

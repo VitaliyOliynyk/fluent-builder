@@ -22,7 +22,7 @@ public class BuilderFactoryWithListAnnotatedTest {
                 .build();
 
         //then
-        assertThat(withList1.equals(withList2)).isTrue();
+        assertThat(withList1).isEqualTo(withList2);
 
     }
 }
