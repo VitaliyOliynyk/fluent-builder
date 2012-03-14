@@ -39,7 +39,7 @@ public class Person {
 
 ```
 
-Or without annotations:
+### Or without annotations:
 
 ```
 public class Person {
