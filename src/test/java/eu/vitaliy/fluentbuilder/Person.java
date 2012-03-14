@@ -1,31 +1,32 @@
 package eu.vitaliy.fluentbuilder;
 
 public class Person {
-    private int age;
+
     private String firstName;
     private String lastName;    
-    
+    private int age;
+
     public Person() {
     }
 
-    public void setAge(int age) {
-        this.age = age;
+
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setAge(int age) {
+        this.age = age;
     }
-    
+
     public interface Builder extends eu.vitaliy.fluentbuilder.Builder<Person> {
         public Builder withFirstName(String firstName);   
         public Builder withLastName(String lastName);
-        public Builder withLovedThings(String... bars);
         public Builder withAge(int age);
-        public Person build();
     }
 
     public static Builder builder() {

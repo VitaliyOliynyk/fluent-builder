@@ -27,7 +27,6 @@ public class PersonAnnotated {
         public Builder withFirstName(String firstName);   
         public Builder withLastName(String lastName);
         public Builder withAge(int age);
-        public PersonAnnotated build();
     }
 
     public static Builder builder() {

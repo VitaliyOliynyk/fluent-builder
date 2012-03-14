@@ -42,7 +42,6 @@ public class BuilderFactoryTest {
     public void createBuilderWithAnnotationTest(){
 //given
         PersonAnnotated person1 = new PersonAnnotated(Data.FIRST_NAME, Data.LAST_NAME, Data.AGE, Arrays.asList(Data.LOVED_THINGS_ARRAY));
-
         //when
         PersonAnnotated person2 = PersonAnnotated.builder()
                 .withFirstName(Data.FIRST_NAME)
