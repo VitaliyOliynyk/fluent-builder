@@ -38,7 +38,9 @@ public class Person {
  }
 
 ```
+
 Or without annotations:
+
 ```
 public class Person {
 
