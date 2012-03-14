@@ -13,9 +13,6 @@ public class Person {
     @FluentSetter
     private String lastName;
 
-    private Person() {
-    }
-
     public interface Builder extends eu.vitaliy.fluentbuilder.Builder<Person> {
         public Builder withFirstName(String firstName);
         public Builder withLastName(String lastName);
@@ -47,11 +44,6 @@ public class Person {
     private String firstName;
     private String lastName;
     private int age;
-
-    public Person() {
-    }
-
-
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
